@@ -1,0 +1,46 @@
+.movieDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.movieDetails h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.movieDetails p {
+    font-size: 18px;
+    margin: 30px;
+}
+
+.movieDetails img {
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.movieDetails ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.movieDetails li {
+    margin-bottom: 10px;
+}
+
+.movieDetails a{
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.buttonList {
+    
+    
+    margin-bottom: 20px;
+}
+button{
+    margin-right: 20px;
+}

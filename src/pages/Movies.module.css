@@ -1,0 +1,42 @@
+h1 {
+    padding-left: 40px;
+}
+
+.movieList {
+    list-style: none;
+    padding-left: 40px;
+}
+ 
+
+.movieList li {
+    margin-bottom: 10px;
+}
+
+.movieList a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.searchForm {
+    margin-bottom: 20px;
+    margin-left: 40px;
+}
+
+.searchForm input {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.searchForm button {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}

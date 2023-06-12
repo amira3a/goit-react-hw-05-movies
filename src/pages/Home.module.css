@@ -1,0 +1,18 @@
+h1{
+    padding-left: 40px;
+}
+.movieList {
+    padding-left: 40px;
+    list-style: none;
+    
+}
+
+.movieList li {
+    margin-bottom: 10px;
+}
+
+.movieList a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}

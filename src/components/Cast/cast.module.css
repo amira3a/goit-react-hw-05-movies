@@ -1,0 +1,18 @@
+.castList {
+    list-style: none;
+    padding: 0;
+}
+
+.castList li {
+    margin-bottom: 10px;
+}
+
+.castList span {
+    font-weight: bocastListd;
+}
+
+.castList a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
