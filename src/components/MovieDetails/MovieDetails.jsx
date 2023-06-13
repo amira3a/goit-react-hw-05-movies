@@ -1,12 +1,21 @@
-import  { useState, useEffect } from 'react';
+import  { useState, useEffect, Suspense, lazy } from 'react';
 import style from "./movieDetails.module.css";
-import { Outlet, useParams } from 'react-router-dom';
+import { Link, Route, Routes, useParams } from 'react-router-dom';
+import { useNavigate} from "react-router-dom";
+
+
+
+const Cast = lazy(() => import('../Cast/Cast'));
+const Reviews = lazy(() => import('../Reviews/Reviews'));
+ 
 
 function MovieDetails() {
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { movieId } = useParams();
   const API_KEY = '605d61cf3adf4a00957fd8ad779797b5';
+  let navigate = useNavigate();
+   
 
   useEffect(() => {
     setIsLoading(true);
@@ -19,12 +28,14 @@ function MovieDetails() {
       .catch(error => console.log(error));
   }, [movieId, API_KEY]);
 
+  
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className={style.movieDetails}>
+      <button onClick={() => navigate(-1)}>Back</button>
       <h1>{movie.title}</h1>
       <p>{movie.overview}</p>
       <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
@@ -33,11 +44,17 @@ function MovieDetails() {
         <li>Runtime: {movie.runtime} minutes</li>
         <li>Genres: {movie.genres.map(genre => genre.name).join(', ')}</li>
       </ul>
-      <div className={style.buttonList}>
-      <button ><a href={`/movies/${movie.id}/cast`} > View Cast </a></button> 
-      <button ><a href={`/movies/${movie.id}/reviews`} >View Reviews </a></button>
+      <div className={style.linkList}>
+      <Link to={`/movies/${movie.id}/cast`} > View Cast </Link> 
+      <Link to={`/movies/${movie.id}/reviews`} >View Reviews </Link>
       </div>
-      <Outlet/>
+      
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 }

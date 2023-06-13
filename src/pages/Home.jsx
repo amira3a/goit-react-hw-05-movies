@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import style from './Home.module.css';
-
+import { Link } from "react-router-dom";
 
 
 
@@ -30,9 +30,9 @@ function Home() {
       <ul className={style.movieList}>
         {movies.map(movie => (
           <li key={movie.id}>
-            <a href={`movies/${ movie.id }`}>
+            <Link to={`movies/${ movie.id }`}>
               {movie.title} ({movie.release_date.substring(0, 4)})
-            </a>
+            </Link>
           </li>
         ))}
       </ul>  

@@ -36,11 +36,11 @@
     font-weight: bold;
 }
 
-.buttonList {
+.linkList {
     
     
     margin-bottom: 20px;
 }
-button{
+.linkList a{
     margin-right: 20px;
 }
