@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import style from './Home.module.css';
 import { Link } from "react-router-dom";
-
+import { useLocation} from "react-router-dom";
 
 
 function Home() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const API_KEY = '605d61cf3adf4a00957fd8ad779797b5';
+  const location = useLocation();
+
 
   useEffect(() => {
     setIsLoading(true);
@@ -24,13 +26,17 @@ function Home() {
     return <div>Loading...</div>;
   }
 
+  console.log("home", location);
+
   return (
     <div>
       <h1>Popular Movies Today</h1>
       <ul className={style.movieList}>
         {movies.map(movie => (
           <li key={movie.id}>
-            <Link to={`movies/${ movie.id }`}>
+            <Link to={`movies/${movie.id}`}
+            state={{from: location.pathname + location.search}}
+            >
               {movie.title} ({movie.release_date.substring(0, 4)})
             </Link>
           </li>

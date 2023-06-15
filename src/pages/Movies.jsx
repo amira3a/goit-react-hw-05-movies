@@ -2,14 +2,17 @@ import { useState, useEffect } from 'react';
 import style from "./Movies.module.css";
 import { Link } from "react-router-dom";
 import { useSearchParams } from 'react-router-dom';
+import { useLocation} from "react-router-dom";
 
 
 function Movies() {
+  const location = useLocation();
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const API_KEY = '605d61cf3adf4a00957fd8ad779797b5';
   const [searchParams, setSearchParams] = useSearchParams();
+  
   
   
 
@@ -43,6 +46,8 @@ function Movies() {
       .catch(error => console.log(error));
   }, [searchParams]);
 
+  console.log("movies", location);
+
   return (
     <div>
       <h1>Search Movies</h1>
@@ -56,7 +61,9 @@ function Movies() {
         <ul className={style.movieList}>
           {movies.map(movie => (
             <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`}>
+              <Link to={`/movies/${movie.id}`}
+              state={{from: location.pathname + location.search}}
+              >
                 {movie.title} ({movie.release_date.substring(0, 4)})
               </Link>
             </li>

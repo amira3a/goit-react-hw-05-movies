@@ -1,7 +1,7 @@
 import  { useState, useEffect, Suspense, lazy } from 'react';
 import style from "./movieDetails.module.css";
 import { Link, Route, Routes, useParams } from 'react-router-dom';
-import { useNavigate} from "react-router-dom";
+import { useLocation} from "react-router-dom";
 
 
 
@@ -10,11 +10,12 @@ const Reviews = lazy(() => import('../Reviews/Reviews'));
  
 
 function MovieDetails() {
+  const location = useLocation();
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { movieId } = useParams();
   const API_KEY = '605d61cf3adf4a00957fd8ad779797b5';
-  let navigate = useNavigate();
+  
    
 
   useEffect(() => {
@@ -33,9 +34,12 @@ function MovieDetails() {
     return <div>Loading...</div>;
   }
 
+  const path = location?.state?.from ?? "/";
+
+  console.log("path", path);
   return (
     <div className={style.movieDetails}>
-      <button onClick={() => navigate(-1)}>Back</button>
+      <Link to={path}>Go back</Link>
       <h1>{movie.title}</h1>
       <p>{movie.overview}</p>
       <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
@@ -45,8 +49,8 @@ function MovieDetails() {
         <li>Genres: {movie.genres.map(genre => genre.name).join(', ')}</li>
       </ul>
       <div className={style.linkList}>
-      <Link to={`/movies/${movie.id}/cast`} > View Cast </Link> 
-      <Link to={`/movies/${movie.id}/reviews`} >View Reviews </Link>
+      <Link to="cast" state={{from: path}}> View Cast </Link> 
+      <Link to="reviews" state={{from: path}} >View Reviews </Link>
       </div>
       
       <Suspense fallback={<div>Loading...</div>}>
